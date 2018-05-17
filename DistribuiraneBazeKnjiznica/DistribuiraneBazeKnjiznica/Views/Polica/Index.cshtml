@@ -1,0 +1,33 @@
+﻿@model IEnumerable<DistribuiraneBazeKnjiznica.Models.Polica>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Dodaj novu", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Oznaka)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Oznaka)
+        </td>
+        <td>
+            @Html.ActionLink("Uredi", "Edit", new { id=item.PolicaID }) |
+            @Html.ActionLink("Detalji", "Details", new { id=item.PolicaID }) |
+            @Html.ActionLink("Izbrši", "Delete", new { id=item.PolicaID })
+        </td>
+    </tr>
+}
+
+</table>

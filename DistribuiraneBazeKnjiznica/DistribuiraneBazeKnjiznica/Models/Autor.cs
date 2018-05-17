@@ -13,7 +13,6 @@ namespace DistribuiraneBazeKnjiznica.Models
         [Key]
         public int AutorID { get; set; }
         [Required]
-        [RegularExpression("/^(?:HR)?(\\d{10}(\\d))$/", ErrorMessage = "Nije unesen ispravan OIB")]
         public string OIB { get; set; }
         [Required, StringLength(40)]
         public string Ime { get; set; }

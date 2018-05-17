@@ -12,7 +12,7 @@ namespace DistribuiraneBazeKnjiznica.Models
         public DbSet<Autor> Autor { get; set; }
         public DbSet<Autorstvo> Autorstvo { get; set; }
         public DbSet<Knjiga> Knjiga { get; set; }
-        public DbSet<Komentar> Komentar { get; set; }
+        public DbSet<Polica> Polica { get; set; }
         public DbSet<Nakladnik> Nakladnik { get; set; }
 
         public ApplicationDbContext()

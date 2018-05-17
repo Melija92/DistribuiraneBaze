@@ -13,10 +13,14 @@ namespace DistribuiraneBazeKnjiznica.Models
         [Key]
         public int KnjigaID { get; set; }
         public string Naziv { get; set; }
+        public int Kolicina { get; set; }
         public int BrojStranica { get; set; }
         public string JezikPisanja { get; set; }
         public int NakladnikID { get; set; }
-        public virtual Nakladnik Nakladnici { get; set; }
+        public virtual Nakladnik Nakladnik { get; set; }
+
+        public int PolicaID { get; set; }
+        public Polica Polica { get; set; }
         public ICollection<Autorstvo> Iznajmljivanja { get; set; }
     }
 }

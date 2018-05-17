@@ -11,10 +11,10 @@ namespace DistribuiraneBazeKnjiznica.Models
     public class Autorstvo
     {
         [Key]
+        public int AutorstvoID { get; set; }
         [Column(Order = 1)]
         public int KnjigaID { get; set; }
         public virtual Knjiga Knjiga { get; set; }
-        [Key]
         [Column(Order = 2)]
         public int AutorID { get; set; }
         public virtual Autor  Autor { get; set; }

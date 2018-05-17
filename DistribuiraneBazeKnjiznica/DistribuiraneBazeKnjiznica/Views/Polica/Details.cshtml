@@ -1,0 +1,26 @@
+﻿@model DistribuiraneBazeKnjiznica.Models.Polica
+
+@{
+    ViewBag.Title = "Detalji police";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Polica</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Oznaka)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Oznaka)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Uredi", "Edit", new { id = Model.PolicaID }) |
+    @Html.ActionLink("Natrag na listu", "Index")
+</p>

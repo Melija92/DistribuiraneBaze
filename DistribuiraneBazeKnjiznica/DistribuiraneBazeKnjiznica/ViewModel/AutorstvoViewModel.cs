@@ -17,6 +17,7 @@ namespace DistribuiraneBazeKnjiznica.ViewModel
         [Required(ErrorMessage = "Obvezno je odabrati autora knjige!")]
         public int AutorID { get; set; }
         public IEnumerable<Autor> Autori { get; set; }
+        [Display(Name = "Udio u % autorstva")]
         public int UdioAutorstva { get; set; }
     }
 }
