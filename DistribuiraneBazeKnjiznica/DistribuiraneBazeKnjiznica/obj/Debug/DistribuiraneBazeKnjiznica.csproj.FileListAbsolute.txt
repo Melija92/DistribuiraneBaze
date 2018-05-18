@@ -168,3 +168,7 @@ D:\Lokalno programiranje - Csharp\DistribuiraneBaze\DistribuiraneBazeKnjiznica\D
 D:\Lokalno programiranje - Csharp\DistribuiraneBaze\DistribuiraneBazeKnjiznica\DistribuiraneBazeKnjiznica\bin\PagedList.Mvc.dll
 D:\Lokalno programiranje - Csharp\DistribuiraneBaze\DistribuiraneBazeKnjiznica\DistribuiraneBazeKnjiznica\bin\PagedList.xml
 D:\Lokalno programiranje - Csharp\DistribuiraneBaze\DistribuiraneBazeKnjiznica\DistribuiraneBazeKnjiznica\bin\PagedList.Mvc.xml
+C:\Domagoj\DistribuiraneBaze\DistribuiraneBazeKnjiznica\DistribuiraneBazeKnjiznica\bin\PagedList.dll
+C:\Domagoj\DistribuiraneBaze\DistribuiraneBazeKnjiznica\DistribuiraneBazeKnjiznica\bin\PagedList.Mvc.dll
+C:\Domagoj\DistribuiraneBaze\DistribuiraneBazeKnjiznica\DistribuiraneBazeKnjiznica\bin\PagedList.xml
+C:\Domagoj\DistribuiraneBaze\DistribuiraneBazeKnjiznica\DistribuiraneBazeKnjiznica\bin\PagedList.Mvc.xml

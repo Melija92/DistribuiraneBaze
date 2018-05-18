@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DistribuiraneBazeKnjiznica.Models;
+using PagedList;
 
 namespace DistribuiraneBazeKnjiznica.Controllers
 {
@@ -14,9 +15,35 @@ namespace DistribuiraneBazeKnjiznica.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        public ActionResult Index()
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(db.Polica.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NazivSortParm = String.IsNullOrEmpty(sortOrder) ? "oznaka_desc" : "";
+
+            if (searchString != null)
+                page = 1;
+            else
+                searchString = currentFilter;
+
+            ViewBag.CurrentFilter = searchString;
+            var police = db.Polica.AsQueryable();
+
+            if (!String.IsNullOrEmpty(searchString))
+                police = police.Where(s => s.Oznaka.Contains(searchString));
+
+            switch (sortOrder)
+            {
+                case "oznaka_desc":
+                    police = police.OrderByDescending(s => s.Oznaka);
+                    break;
+                default:
+                    police = police.OrderBy(s => s.Oznaka);
+                    break;
+            }
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            return View(police.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult Details(int? id)

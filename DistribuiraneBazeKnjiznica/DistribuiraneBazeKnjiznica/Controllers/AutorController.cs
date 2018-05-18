@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DistribuiraneBazeKnjiznica.Models;
+using PagedList;
 
 namespace DistribuiraneBazeKnjiznica.Controllers
 {
@@ -15,9 +16,49 @@ namespace DistribuiraneBazeKnjiznica.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Autor
-        public ActionResult Index()
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(db.Autor.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.ImeSortParm = String.IsNullOrEmpty(sortOrder) ? "ime_desc" : "";
+            ViewBag.PrezimeSortParm = sortOrder == "prezime_asc" ? "prezime_desc" : "prezime_asc";
+            ViewBag.OIBSortParm =  sortOrder == "oib_asc" ? "oib_desc" : "oib_asc";
+            
+            if (searchString != null)
+                page = 1;
+            else
+                searchString = currentFilter;
+
+            ViewBag.CurrentFilter = searchString;
+            var autori = db.Autor.AsQueryable();
+
+            if (!String.IsNullOrEmpty(searchString))
+                autori = autori.Where(s => s.Ime.Contains(searchString) || s.Prezime.Contains(searchString));
+
+            switch (sortOrder)
+            {
+                case "ime_desc":
+                    autori = autori.OrderByDescending(s => s.Ime);
+                    break;
+                case "prezime_desc":
+                    autori = autori.OrderByDescending(s => s.Prezime);
+                    break;
+                case "prezime_asc":
+                    autori = autori.OrderBy(s => s.Prezime);
+                    break;
+                case "oib_desc":
+                    autori = autori.OrderByDescending(s => s.OIB);
+                    break;
+                case "oib_asc":
+                    autori = autori.OrderBy(s => s.OIB);
+                    break;
+                default:
+                    autori = autori.OrderBy(s => s.Ime);
+                    break;
+            }
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            return View(autori.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Autor/Details/5

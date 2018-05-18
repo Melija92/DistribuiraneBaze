@@ -22,3 +22,34 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/*Bootstrap i html overrajdi*/
+.navbar-inverse {
+    background-color: #428bca;
+    border-color: #428bca;
+}
+
+.navbar-inverse .navbar-brand {
+    color: black;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: black;
+}
+
+.navbar-inverse .navbar-nav > .dropdown > a .caret {
+    border-top-color: black;
+    border-bottom-color: black;
+}
+
+.navbar-nav > li > .dropdown-menu {
+    margin-top: 0;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    background-color: steelblue;
+}
+
+span.field-validation-error {
+    font-size: 15px;
+    color: red;
+}

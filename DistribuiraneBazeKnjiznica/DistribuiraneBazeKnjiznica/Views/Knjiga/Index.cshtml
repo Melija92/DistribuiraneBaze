@@ -27,13 +27,13 @@
 <table class="table table-striped">
     <tr>
         <th>
+            @Html.ActionLink("Naziv knjige", "Index", new { sortOrder = ViewBag.NazivSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
             @Html.ActionLink("Nakladnik", "Index", new { sortOrder = ViewBag.NakladnikSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.ActionLink("Oznaka police", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th>
-            @Html.ActionLink("Naziv knjige", "Index", new { sortOrder = ViewBag.NazivSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("Oznaka police", "Index", new { sortOrder = ViewBag.OznakaSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
             @Html.ActionLink("Količina", "Index", new { sortOrder = ViewBag.KolicinaSortParm, currentFilter = ViewBag.CurrentFilter })
@@ -51,13 +51,13 @@
     {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Naziv)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Nakladnik.Naziv)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Polica.Oznaka)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Naziv)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Kolicina)
@@ -78,7 +78,7 @@
 
 </table>
 
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+Stranica @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) od @Model.PageCount
 
 @Html.PagedListPager(Model, page => Url.Action("Index",
     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

@@ -67,6 +67,12 @@ namespace DistribuiraneBazeKnjiznica.Controllers
                 case "jezikPisanja_asc":
                     knjige = knjige.OrderBy(s => s.JezikPisanja);
                     break;
+                case "oznaka_desc":
+                    knjige = knjige.OrderByDescending(s => s.Polica.Oznaka);
+                    break;
+                case "oznaka_asc":
+                    knjige = knjige.OrderBy(s => s.Polica.Oznaka);
+                    break;
                 default:
                     knjige = knjige.OrderBy(s => s.Naziv);
                     break;
