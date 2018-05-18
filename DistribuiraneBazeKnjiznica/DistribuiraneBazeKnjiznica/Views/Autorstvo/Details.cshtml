@@ -1,7 +1,7 @@
 ﻿@model DistribuiraneBazeKnjiznica.Models.Autorstvo
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalji autorstva";
 }
 
 <div>
@@ -35,6 +35,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.AutorstvoID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Uredi", "Edit", new { id = Model.AutorstvoID }) |
+    @Html.ActionLink("Natrag na listu", "Index")
 </p>

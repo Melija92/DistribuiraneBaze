@@ -7,18 +7,60 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DistribuiraneBazeKnjiznica.Models;
+using PagedList;
 
 namespace DistribuiraneBazeKnjiznica.Controllers
 {
     public class AutorstvoController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        
         // GET: Autorstvo
-        public ActionResult Index()
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            var autorstvo = db.Autorstvo.Include(a => a.Autor).Include(a => a.Knjiga);
-            return View(autorstvo.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NazivSortParm = String.IsNullOrEmpty(sortOrder) ? "naziv_desc" : "";
+            ViewBag.OIBSortParm = sortOrder == "OIB_asc" ? "OIB_desc" : "OIB_asc";
+            ViewBag.UdioAutorstvaSortParm = sortOrder == "udioAutorstva_asc" ? "udioAutorstva_desc" : "udioAutorstva_asc";
+
+            if (searchString != null)
+                page = 1;
+            else
+                searchString = currentFilter;
+
+            ViewBag.CurrentFilter = searchString;
+
+            var autorstva = db.Autorstvo.Include(k => k.Autor).Include(k => k.Knjiga);
+
+            if (!String.IsNullOrEmpty(searchString))
+                autorstva = autorstva.Where(s => s.Autor.OIB.Contains(searchString) ||
+                                           s.Knjiga.Naziv.Contains(searchString));
+
+            switch (sortOrder)
+            {
+                case "naziv_desc":
+                    autorstva = autorstva.OrderByDescending(s => s.Knjiga.Naziv);
+                    break;
+                case "OIB_desc":
+                    autorstva = autorstva.OrderByDescending(s => s.Autor.OIB);
+                    break;
+                case "OIB_asc":
+                    autorstva = autorstva.OrderBy(s => s.Autor.OIB);
+                    break;
+                case "udioAutorstva_desc":
+                    autorstva = autorstva.OrderByDescending(s => s.UdioAutorstva);
+                    break;
+                case "udioAutorstva_asc":
+                    autorstva = autorstva.OrderBy(s => s.UdioAutorstva);
+                    break;
+                default:
+                    autorstva = autorstva.OrderBy(s => s.Knjiga.Naziv);
+                    break;
+            }
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            return View(autorstva.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Autorstvo/Details/5
