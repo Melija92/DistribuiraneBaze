@@ -12,11 +12,11 @@ namespace DistribuiraneBazeKnjiznica.Models
     {
         [Key]
         public int AutorID { get; set; }
-        [Required]
+        [Required(ErrorMessage = "OIB autora obvezan je za unos!")]
         public string OIB { get; set; }
-        [Required, StringLength(40)]
+        [Required(ErrorMessage = "Ime autora obvezan je za unos!")]
         public string Ime { get; set; }
-        [Required, StringLength(40)]
+        [Required(ErrorMessage = "Prezime autora obvezan je za unos!")]
         public string Prezime { get; set; }
         public ICollection<Autorstvo> Iznajmljivanja { get; set; }
     }

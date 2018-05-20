@@ -1,56 +1,53 @@
-﻿@model DistribuiraneBazeKnjiznica.Models.Nakladnik
+﻿@model IEnumerable<DistribuiraneBazeKnjiznica.ViewModel.KnjigaViewModel>
 
 @{
     ViewBag.Title = "Detalji nakladnika";
 }
 
 <div>
-    <h4>Nakladnik</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.OIB)
-        </dt>
+    <h4>Nakladnik - @ViewBag.NazivNakladnika</h4>
+    <table class="table table-striped">
+        <tr>
+            <th>
+                Naziv knjige
+            </th>
+            <th>
+                Oznaka police
+            </th>
+            <th>
+                Količina
+            </th>
+            <th>
+                Broj stranica
+            </th>
+            <th>
+                Jezik pisanja
+            </th>
+        </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.OIB)
-        </dd>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Naziv)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NazivPolice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kolicina)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BrojStranica)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JezikPisanja)
+                </td>
+            </tr>
+        }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Naziv)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Naziv)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Adresa)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Adresa)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Telefon)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Telefon)
-        </dd>
-
-    </dl>
+    </table>
 </div>
 <p>
-    @Html.ActionLink("Uredi", "Edit", new { id = Model.NakladnikID }) |
     @Html.ActionLink("Natrag na listu", "Index")
 </p>

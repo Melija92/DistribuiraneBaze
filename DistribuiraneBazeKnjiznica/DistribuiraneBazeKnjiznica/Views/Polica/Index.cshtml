@@ -23,7 +23,7 @@
     </div>
 }
 
-<table class="table table-striped">
+<table class="table table-striped" style="width: 500px;">
     <tr>
         <th>
             @Html.ActionLink("Oznaka police", "Index", new { sortOrder = ViewBag.NazivSortParm, currentFilter = ViewBag.CurrentFilter })
@@ -37,7 +37,7 @@
         </td>
         <td>
             @Html.ActionLink("Uredi", "Edit", new { id=item.PolicaID }) |
-            @Html.ActionLink("Detalji", "Details", new { id=item.PolicaID }) |
+            @Html.ActionLink("Knjige na polici", "Details", new { id=item.PolicaID }) |
             @Html.ActionLink("Izbrši", "Delete", new { id=item.PolicaID })
         </td>
     </tr>

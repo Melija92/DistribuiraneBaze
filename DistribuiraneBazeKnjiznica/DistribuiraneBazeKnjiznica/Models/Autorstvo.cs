@@ -18,6 +18,7 @@ namespace DistribuiraneBazeKnjiznica.Models
         [Column(Order = 2)]
         public int AutorID { get; set; }
         public virtual Autor  Autor { get; set; }
+        [Required(ErrorMessage = "Udio autorstva obvezan je za unos!")]
         public int UdioAutorstva { get; set; }
     }
 }

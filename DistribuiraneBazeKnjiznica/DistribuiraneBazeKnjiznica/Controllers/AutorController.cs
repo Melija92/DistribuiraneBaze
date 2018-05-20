@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DistribuiraneBazeKnjiznica.Models;
+using DistribuiraneBazeKnjiznica.ViewModel;
 using PagedList;
 
 namespace DistribuiraneBazeKnjiznica.Controllers
@@ -61,30 +62,42 @@ namespace DistribuiraneBazeKnjiznica.Controllers
             return View(autori.ToPagedList(pageNumber, pageSize));
         }
 
-        // GET: Autor/Details/5
+
         public ActionResult Details(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Autor autor = db.Autor.Find(id);
-            if (autor == null)
+
+            var knjigeID = db.Autorstvo
+                .Where(a => a.AutorID == id)
+                .Select(a => a.KnjigaID)
+                .ToList();
+
+            List<KnjigaViewModel> knjige = new List<KnjigaViewModel>();
+            foreach (var knjigaID in knjigeID)
             {
-                return HttpNotFound();
+                var knjiga = db.Knjiga.Find(knjigaID);
+
+                KnjigaViewModel knjigaViewModel = new KnjigaViewModel();
+                knjigaViewModel.Naziv = knjiga.Naziv;
+                knjigaViewModel.NazivNakladnika = knjiga.Nakladnik.Naziv;
+                knjigaViewModel.BrojStranica = knjiga.BrojStranica;
+                knjigaViewModel.Kolicina = knjiga.Kolicina;
+                knjigaViewModel.JezikPisanja = knjiga.JezikPisanja;
+
+                knjige.Add(knjigaViewModel);
             }
-            return View(autor);
+            ViewBag.NazivAutora = db.Autor.FirstOrDefault(a => a.AutorID == id).Ime
+                + " " + db.Autor.FirstOrDefault(a => a.AutorID == id).Prezime;
+            return View(knjige);
         }
 
-        // GET: Autor/Create
+
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Autor/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "AutorID,OIB,Ime,Prezime")] Autor autor)
@@ -99,7 +112,7 @@ namespace DistribuiraneBazeKnjiznica.Controllers
             return View(autor);
         }
 
-        // GET: Autor/Edit/5
+
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -114,9 +127,6 @@ namespace DistribuiraneBazeKnjiznica.Controllers
             return View(autor);
         }
 
-        // POST: Autor/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "AutorID,OIB,Ime,Prezime")] Autor autor)
@@ -130,7 +140,6 @@ namespace DistribuiraneBazeKnjiznica.Controllers
             return View(autor);
         }
 
-        // GET: Autor/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -145,7 +154,6 @@ namespace DistribuiraneBazeKnjiznica.Controllers
             return View(autor);
         }
 
-        // POST: Autor/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

@@ -222,11 +222,7 @@
     <Compile Include="Models\Polica.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModel\AutorstvoViewModel.cs" />
-    <Compile Include="ViewModel\AutorViewModel.cs" />
     <Compile Include="ViewModel\KnjigaViewModel.cs" />
-    <Compile Include="ViewModel\NakladnikViewModel.cs" />
-    <Compile Include="ViewModel\PolicaViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />

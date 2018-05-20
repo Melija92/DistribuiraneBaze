@@ -1,24 +1,53 @@
-﻿@model DistribuiraneBazeKnjiznica.Models.Polica
+﻿@model IEnumerable<DistribuiraneBazeKnjiznica.ViewModel.KnjigaViewModel>
 
 @{
     ViewBag.Title = "Detalji police";
 }
 
 <div>
-    <h4>Polica</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Oznaka)
-        </dt>
+    <h4>Polica - @ViewBag.OznakaPolice</h4>
+    <table class="table table-striped">
+        <tr>
+            <th>
+                Naziv knjige
+            </th>
+            <th>
+                Nakladnik
+            </th>
+            <th>
+                Količina
+            </th>
+            <th>
+                Broj stranica
+            </th>
+            <th>
+                Jezik pisanja
+            </th>
+        </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.Oznaka)
-        </dd>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Naziv)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NazivNakladnika)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kolicina)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BrojStranica)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JezikPisanja)
+                </td>
+            </tr>
+        }
 
-    </dl>
+    </table>
 </div>
 <p>
-    @Html.ActionLink("Uredi", "Edit", new { id = Model.PolicaID }) |
     @Html.ActionLink("Natrag na listu", "Index")
 </p>

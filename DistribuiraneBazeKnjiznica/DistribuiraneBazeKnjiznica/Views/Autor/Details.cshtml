@@ -1,40 +1,53 @@
-﻿@model DistribuiraneBazeKnjiznica.Models.Autor
+﻿@model IEnumerable<DistribuiraneBazeKnjiznica.ViewModel.KnjigaViewModel>
 
 @{
     ViewBag.Title = "Detalji autora";
 }
 
 <div>
-    <h4>Autor</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.OIB)
-        </dt>
+    <h4>Autor - @ViewBag.NazivAutora</h4>
+    <table class="table table-striped">
+        <tr>
+            <th>
+                Naziv knjige
+            </th>
+            <th>
+                Nakladnik
+            </th>
+            <th>
+                Količina
+            </th>
+            <th>
+                Broj stranica
+            </th>
+            <th>
+                Jezik pisanja
+            </th>
+        </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.OIB)
-        </dd>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NazivNakladnika)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kolicina)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BrojStranica)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JezikPisanja)
+            </td>
+        </tr>
+        }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Ime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Prezime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Prezime)
-        </dd>
-
-    </dl>
+    </table>
 </div>
 <p>
-    @Html.ActionLink("Uredi", "Edit", new { id = Model.AutorID }) |
     @Html.ActionLink("Natrag na listu", "Index")
 </p>

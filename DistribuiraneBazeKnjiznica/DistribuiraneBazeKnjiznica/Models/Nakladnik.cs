@@ -12,9 +12,9 @@ namespace DistribuiraneBazeKnjiznica.Models
     {
         [Key]
         public int NakladnikID { get; set; }
-        [Required]
+        [Required(ErrorMessage = "OIB nakladnika obvezan je za unos!")]
         public string OIB { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Naziv nakladnika obvezan je za unos!")]
         public string Naziv { get; set; }
         public string Adresa { get; set; }
         public string Email { get; set; }

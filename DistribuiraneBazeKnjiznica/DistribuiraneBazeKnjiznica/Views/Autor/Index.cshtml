@@ -22,7 +22,7 @@
         </div>
     </div>
 }
-<table class="table table-striped">
+<table class="table table-striped" style="width:700px;">
     <tr>
         <th>
             @Html.ActionLink("OIB", "Index", new { sortOrder = ViewBag.OIBSortParm, currentFilter = ViewBag.CurrentFilter })
@@ -50,7 +50,7 @@
             </td>
             <td>
                 @Html.ActionLink("Uredi", "Edit", new { id = item.AutorID }) |
-                @Html.ActionLink("Detalji", "Details", new { id = item.AutorID }) |
+                @Html.ActionLink("Knjige autora", "Details", new { id = item.AutorID }) |
                 @Html.ActionLink("Izbriši", "Delete", new { id = item.AutorID })
             </td>
         </tr>

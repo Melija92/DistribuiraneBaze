@@ -12,7 +12,7 @@ namespace DistribuiraneBazeKnjiznica.Models
     {
         [Key]
         public int PolicaID { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Oznaka police obvezna je za unos!")]
         public string Oznaka { get; set; }
         public ICollection<Knjiga> Knjige { get; set; }
     }

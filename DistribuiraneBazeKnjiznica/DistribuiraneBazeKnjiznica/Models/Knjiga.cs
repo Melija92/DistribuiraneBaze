@@ -12,8 +12,11 @@ namespace DistribuiraneBazeKnjiznica.Models
     {
         [Key]
         public int KnjigaID { get; set; }
+        [Required(ErrorMessage = "Naziv knjige obvezno je za unos!")]
         public string Naziv { get; set; }
+        [Required(ErrorMessage = "Količina knjiga obavezna je za unos!")]
         public int Kolicina { get; set; }
+        [Required(ErrorMessage = "Broj stranica obvezan je za unos!")]
         public int BrojStranica { get; set; }
         public string JezikPisanja { get; set; }
         public int NakladnikID { get; set; }
@@ -21,6 +24,6 @@ namespace DistribuiraneBazeKnjiznica.Models
 
         public int PolicaID { get; set; }
         public Polica Polica { get; set; }
-        public ICollection<Autorstvo> Iznajmljivanja { get; set; }
+        public IEnumerable<Autorstvo> Autorstva { get; set; }
     }
 }

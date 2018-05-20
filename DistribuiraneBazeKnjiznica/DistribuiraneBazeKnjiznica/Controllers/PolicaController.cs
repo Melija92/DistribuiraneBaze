@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DistribuiraneBazeKnjiznica.Models;
+using DistribuiraneBazeKnjiznica.ViewModel;
 using PagedList;
 
 namespace DistribuiraneBazeKnjiznica.Controllers
@@ -49,15 +50,19 @@ namespace DistribuiraneBazeKnjiznica.Controllers
         public ActionResult Details(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Polica polica = db.Polica.Find(id);
-            if (polica == null)
-            {
-                return HttpNotFound();
-            }
-            return View(polica);
+
+            var detalji = db.Knjiga.Where(a => a.PolicaID == id)
+                                    .Select(a => new KnjigaViewModel
+                                    {
+                                        Naziv = a.Naziv,
+                                        NazivNakladnika = a.Nakladnik.Naziv,
+                                        Kolicina = a.Kolicina,
+                                        BrojStranica = a.BrojStranica,
+                                        JezikPisanja = a.JezikPisanja
+                                    });
+            ViewBag.OznakaPolice = db.Polica.FirstOrDefault(a => a.PolicaID == id).Oznaka;
+            return View(detalji);
         }
 
         public ActionResult Create()
