@@ -13,6 +13,7 @@ namespace DistribuiraneBazeKnjiznica.Models
         [Key]
         public int AutorID { get; set; }
         [Required(ErrorMessage = "OIB autora obvezan je za unos!")]
+        [RegularExpression(@"\d{11}", ErrorMessage = "OIB nije ispravan")]
         public string OIB { get; set; }
         [Required(ErrorMessage = "Ime autora obvezan je za unos!")]
         public string Ime { get; set; }
